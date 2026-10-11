@@ -116,10 +116,10 @@ main
 **Evidencia:** <!-- ![Captura 04](evidencias/caso-04/captura.png) -->
 
 **1. ¿Qué problema resuelve Stash?**
-> *(pendiente)*
+> Resuelve la necesidad de guardar temporalmente cambios de código a medio terminar para limpiar tu espacio de trabajo sin perder nada, permitiéndote cambiar de rama rápidamente para solucionar una urgencia o actualizar tu proyecto.
 
 **2. ¿Por qué Stash no reemplaza a Commit?**
-> *(pendiente)*
+> Porque el stash es solo un borrador local y temporal que no guarda un historial permanente ni se puede compartir en GitHub, mientras que un commit crea un punto de control definitivo e inmutable en el historial que se sincroniza con todo el equipo.
 
 **3. ¿Qué puede ocurrir al aplicar un stash sobre una rama que cambió?**
-> *(pendiente)*
+> Pueden generarse conflictos de fusión (merge conflicts) si el código que guardaste en el stash intenta modificar las mismas líneas de un archivo que fueron cambiadas en la rama mientras estabas ausente, obligándote a resolver las diferencias a mano.
