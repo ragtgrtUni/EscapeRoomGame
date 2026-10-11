@@ -125,3 +125,4 @@ main
 > Pueden generarse conflictos de fusión (merge conflicts) si el código que guardaste en el stash intenta modificar las mismas líneas de un archivo que fueron cambiadas en la rama mientras estabas ausente, obligándote a resolver las diferencias a mano.
 
 (PRUEBA CASO 5 ERRORRRRR)
+xd
