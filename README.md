@@ -17,6 +17,7 @@ Proyecto colaborativo de laboratorio de Git + GitHub + Visual Studio Code + Unit
 - Feature_Animation
 - Feature_Puzzle
 - Feature_UI
+Flujo: Feature → Dev → main.
 
 ## Configuración
 - Unity: 6000.5.5f1
