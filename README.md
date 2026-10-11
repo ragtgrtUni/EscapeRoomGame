@@ -123,3 +123,20 @@ main
 
 **3. ¿Qué puede ocurrir al aplicar un stash sobre una rama que cambió?**
 > Pueden generarse conflictos de fusión (merge conflicts) si el código que guardaste en el stash intenta modificar las mismas líneas de un archivo que fueron cambiadas en la rama mientras estabas ausente, obligándote a resolver las diferencias a mano.
+
+### Caso 05 — Push rechazado porque Dev avanzó
+
+**Evidencia:** <!-- ![Captura 05](evidencias/caso-05/captura.png) -->
+
+**1. ¿Qué diferencia hay entre Fetch y Pull?**
+> Fetch solo descarga los nuevos commits e información del servidor remoto a tu computadora sin modificar ni tocar tu código actual, mientras que Pull descarga esa misma información e intenta fusionarla (merge) de inmediato con tu rama de trabajo activa.
+
+**2. ¿Por qué Git rechaza un Push no fast-forward?**
+> ¿Qué diferencia hay entre Fetch y Pull?
+
+Lo rechaza por seguridad para evitar que subas una versión de la historia que ignore o sobrescriba los commits que otros compañeros ya habían publicado en el servidor remoto mientras tu copia local estaba desactualizada.
+
+
+**3. ¿Qué riesgo existiría si el remoto pudiera ser sobrescrito automáticamente?**
+> El riesgo principal sería la pérdida permanente de trabajo del equipo, ya que cualquier integrante podría borrar o reemplazar accidentalmente los avances de sus compañeros con un simple push, desorganizando todo el proyecto.
+
