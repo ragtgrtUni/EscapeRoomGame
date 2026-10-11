@@ -26,3 +26,5 @@ Flujo: Feature → Dev → main.
 
 ## Objetivo
 Explorar una habitación, resolver un código, abrir un cofre, obtener una llave y abrir la puerta de salida.
+
+## Caso 5 test cfff
