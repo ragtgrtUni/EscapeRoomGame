@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float interactionDistance = 2f;
+
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+            TryInteract();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TryInteract()
     {
-        
+        Debug.Log("Buscando objeto interactuable...");
     }
 }
+
