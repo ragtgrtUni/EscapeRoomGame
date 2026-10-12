@@ -49,8 +49,8 @@ main
 | 01 | Crear el repositorio y primer commit | E — Alan | ✅ |
 | 02 | Crear Dev y ramas Feature | D — Cristhian | ✅ |
 | 03 | Commit en la rama equivocada | E — Alan | ✅ |
-| 04 | Cambios locales y Stash | C — Mariana | ⬜ |
-| 05 | Push rechazado porque Dev avanzó | A — Aaron | ⬜ |
+| 04 | Cambios locales y Stash | C — Mariana | ✅ |
+| 05 | Push rechazado porque Dev avanzó | A — Aaron | ✅ |
 | 06 | Conflicto en PlayerController.cs | E — Alan | ⬜ |
 | 07 | Conflicto en Player.prefab | B — Grover | ⬜ |
 | 08 | Conflicto en MainScene.unity | D — Cristhian | ⬜ |
@@ -67,11 +67,9 @@ main
 | 19 | Cherry-pick de una corrección | A — Aaron | ⬜ |
 | 20 | Pull Request y entrega final | C — Mariana | ⬜ |
 
-<!-- ZONA 2: DETALLE POR CASO. Copia el bloque de abajo para cada caso nuevo. -->
+<!-- ZONA 2: DETALLE POR CASO. Para responder un caso, reemplaza *(pendiente)* por tu respuesta. -->
 
 ### Caso 01 — Crear el repositorio y primer commit
-
-**Evidencia:** <!-- ![Captura 01](evidencias/caso-01/captura.png) -->
 
 **1. ¿Por qué no conviene subir `Library/`?**
 > Porque es una carpeta que Unity regenera sola en cada PC (caché, importaciones). Pesa mucho, cambia constantemente y causaría conflictos inútiles en cada commit. Lo que hay que compartir es `Assets`, `Packages` y `ProjectSettings`.
@@ -89,8 +87,6 @@ main
 
 ### Caso 02 — Crear Dev y ramas Feature
 
-**Evidencia:** <!-- ![Captura 02](evidencias/caso-02/captura.png) -->
-
 **1. ¿Desde qué commit nació tu Feature?**
 > Mi rama `Feature_Puzzle` nació desde el commit en el que agregué la línea del flujo de trabajo en el README.md (`docs: add branch workflow`), creado justo después de crear la rama `Dev`.
 
@@ -100,8 +96,6 @@ main
 ---
 
 ### Caso 03 — Commit en la rama equivocada
-
-**Evidencia:** <!-- ![Captura 03](evidencias/caso-03/captura.png) -->
 
 **1. ¿Qué significa que una rama apunte a un commit?**
 > Una rama es solo una etiqueta que señala un commit. Al hacer un commit nuevo, la etiqueta de la rama actual se mueve a él. Por eso se puede crear otra rama en ese mismo punto y conservar el trabajo.
@@ -113,8 +107,6 @@ main
 
 ### Caso 04 — Cambios locales y Stash
 
-**Evidencia:** <!-- ![Captura 04](evidencias/caso-04/captura.png) -->
-
 **1. ¿Qué problema resuelve Stash?**
 > Resuelve la necesidad de guardar temporalmente cambios de código a medio terminar para limpiar tu espacio de trabajo sin perder nada, permitiéndote cambiar de rama rápidamente para solucionar una urgencia o actualizar tu proyecto.
 
@@ -124,16 +116,174 @@ main
 **3. ¿Qué puede ocurrir al aplicar un stash sobre una rama que cambió?**
 > Pueden generarse conflictos de fusión (merge conflicts) si el código que guardaste en el stash intenta modificar las mismas líneas de un archivo que fueron cambiadas en la rama mientras estabas ausente, obligándote a resolver las diferencias a mano.
 
-(PRUEBA CASO 5 ERRORRRRR)
-### Caso 05 — Push rechazado porque Dev avanzó
+---
 
-**Evidencia:** <!-- ![Captura 05](evidencias/caso-05/captura.png) -->
+### Caso 05 — Push rechazado porque Dev avanzó
 
 **1. ¿Qué diferencia hay entre Fetch y Pull?**
 > Fetch solo descarga los nuevos commits e información del servidor remoto a tu computadora sin modificar ni tocar tu código actual, mientras que Pull descarga esa misma información e intenta fusionarla (merge) de inmediato con tu rama de trabajo activa.
 
 **2. ¿Por qué Git rechaza un Push no fast-forward?**
-> ¿Qué diferencia hay entre Fetch y Pull?
+> Lo rechaza por seguridad para evitar que subas una versión de la historia que ignore o sobrescriba los commits que otros compañeros ya habían publicado en el servidor remoto mientras tu copia local estaba desactualizada.
 
-Lo rechaza por seguridad para evitar que subas una versión de la historia que ignore o sobrescriba los commits que otros compañeros ya habían publicado en el servidor remoto mientras tu copia local estaba desactualizada.
-xd
+**3. ¿Qué riesgo existiría si el remoto pudiera ser sobrescrito automáticamente?**
+> El riesgo principal sería la pérdida permanente de trabajo del equipo, ya que cualquier integrante podría borrar o reemplazar accidentalmente los avances de sus compañeros con un simple push, desorganizando todo el proyecto.
+
+---
+
+### Caso 06 — Conflicto en PlayerController.cs
+
+**1. ¿Qué diferencia existe entre resolver texto y resolver software?**
+> Resolver texto es decidir qué líneas quedan. Resolver software es lograr que el código funcione: conservar la intención de ambos autores, que compile y que el juego se comporte bien.
+
+**2. ¿Qué significa Current?**
+> Es la versión de la rama en la que uno está parado (la que recibe el merge). Incoming es la que viene de la otra rama.
+
+**3. ¿Por qué siempre se prueba Unity después?**
+> Porque un merge sin errores de Git puede compilar mal o romper el comportamiento. Solo ejecutar el juego confirma que el resultado es correcto.
+
+---
+
+### Caso 07 — Conflicto en Player.prefab
+
+**1. ¿Por qué un Prefab es más delicado que un script?**
+> *(pendiente)*
+
+**2. ¿Qué tipo de referencias pueden romperse?**
+> *(pendiente)*
+
+---
+
+### Caso 08 — Conflicto en MainScene.unity
+
+**1. ¿Por qué conviene evitar editar la misma escena simultáneamente?**
+> *(pendiente)*
+
+**2. ¿Cómo organizarías el trabajo del equipo para reducir estos conflictos?**
+> *(pendiente)*
+
+---
+
+### Caso 09 — Archivo eliminado vs. modificado
+
+**1. ¿Git puede decidir arquitectura?**
+> *(pendiente)*
+
+**2. ¿Qué riesgo hay en conservar un archivo solo para evitar el conflicto?**
+> *(pendiente)*
+
+---
+
+### Caso 10 — Dos alumnos crean PuzzleManager.cs
+
+**1. ¿Por qué "el último commit gana" no es una regla válida?**
+> *(pendiente)*
+
+**2. ¿Qué principio de diseño debe guiar la integración?**
+> *(pendiente)*
+
+---
+
+### Caso 11 — Cambios en ProjectSettings
+
+**1. ¿Por qué no se debe aceptar ProjectSettings a ciegas?**
+> *(pendiente)*
+
+**2. ¿Qué configuración consideras especialmente sensible?**
+> *(pendiente)*
+
+---
+
+### Caso 12 — Commit incorrecto
+
+**1. ¿Cuándo conviene Amend?**
+> *(pendiente)*
+
+**2. ¿Por qué reescribir historia compartida puede afectar a otros?**
+> *(pendiente)*
+
+---
+
+### Caso 13 — Archivo que debía estar en .gitignore
+
+**1. ¿Por qué `.gitignore` no borró el historial?**
+> *(pendiente)*
+
+**2. ¿Qué diferencia hay entre Working Tree e Index?**
+> *(pendiente)*
+
+---
+
+### Caso 14 — Feature desactualizada respecto a Dev
+
+**1. ¿Por qué conviene resolver el conflicto en la Feature?**
+> *(pendiente)*
+
+**2. ¿Qué diferencia conceptual existe entre merge y rebase?**
+> *(pendiente)*
+
+---
+
+### Caso 15 — Conflicto en varios archivos
+
+**1. ¿Cómo organizaste la resolución?**
+> *(pendiente)*
+
+**2. ¿Por qué conviene validar Unity después de resolver todos?**
+> *(pendiente)*
+
+---
+
+### Caso 16 — Accept Both rompe el juego
+
+**1. ¿Por qué Accept Both no garantiza corrección?**
+> *(pendiente)*
+
+**2. ¿Qué pruebas detectaron el problema?**
+> *(pendiente)*
+
+---
+
+### Caso 17 — Revert de un cambio compartido
+
+**1. ¿Por qué no borrar el commit original?**
+> *(pendiente)*
+
+**2. ¿Qué ventaja tiene Revert en una historia compartida?**
+> *(pendiente)*
+
+---
+
+### Caso 18 — Recuperar trabajo aparentemente perdido
+
+**1. ¿Qué registra reflog?**
+> *(pendiente)*
+
+**2. ¿Por qué guardar el hash fue importante?**
+> *(pendiente)*
+
+---
+
+### Caso 19 — Cherry-pick de una corrección
+
+**1. ¿Por qué no hacer merge?**
+> *(pendiente)*
+
+**2. ¿Qué diferencia hay entre cherry-pick y merge?**
+> *(pendiente)*
+
+---
+
+### Caso 20 — Pull Request y entrega final
+
+**1. ¿Qué ventaja tiene revisar antes de integrar?**
+> *(pendiente)*
+
+**2. ¿Qué diferencia hay entre Dev y main?**
+> *(pendiente)*
+
+**3. ¿Qué problema evita el Pull Request?**
+> *(pendiente)*
+
+**4. ¿Qué evidencia demuestra mejor que el trabajo fue colaborativo?**
+> *(pendiente)*
