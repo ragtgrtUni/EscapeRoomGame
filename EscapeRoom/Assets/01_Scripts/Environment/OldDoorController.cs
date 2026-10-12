@@ -1,10 +1,22 @@
 using UnityEngine;
 
-public class OldDoorController : MonoBehaviour
+public class DoorController : MonoBehaviour, IInteractable
 {
-    public void Open()
-    {
-        Debug.Log("Puerta antigua abierta (versión corregida).");
-    }
+    [SerializeField] private Animator animator;
 
+    public void Interact()
+    {
+        if (!GameManager.Instance.HasKey)
+        {
+            Debug.Log("Necesitas la llave.");
+            return;
+        }
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Open");
+        }
+
+        Debug.Log("Puerta abierta. ¡Escape completado!");
+    }
 }
