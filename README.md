@@ -147,20 +147,20 @@ main
 ### Caso 07 — Conflicto en Player.prefab
 
 **1. ¿Por qué un Prefab es más delicado que un script?**
-> *(pendiente)*
+> Estructura YAML compleja: A diferencia de un script de código plano (.cs) donde los conflictos de texto se resuelven de forma lineal y predecible, un Prefab almacena una estructura jerárquica serializada muy densa basada en identificadores únicos (fileID y GUID). Alto riesgo de corrupción total: Un pequeño error al fusionar bloques de texto en un Prefab puede corromper el archivo por completo, impidiendo que Unity logre leerlo y provocando que el objeto desaparezca o falle en el proyecto.
 
 **2. ¿Qué tipo de referencias pueden romperse?**
-> *(pendiente)*
+> Referencias a scripts y componentes (Missing Script): Se pierde el enlace que conecta al GameObject con el código o componente que le otorga su funcionalidad. Referencias a Assets externos: Enlaces rotos hacia texturas, materiales, animaciones, prefabs hijos o archivos de audio debido a alteraciones en los identificadores de los archivos. Modificaciones anidadas (Prefab Overrides): Conexiones alteradas entre un Prefab principal y sus instancias o variantes, haciendo que pierdan los cambios personalizados aplicados en la escena.
 
 ---
 
 ### Caso 08 — Conflicto en MainScene.unity
 
 **1. ¿Por qué conviene evitar editar la misma escena simultáneamente?**
-> *(pendiente)*
+> Es fácil romper la escena: Unity guarda las escenas en archivos de texto (YAML) muy complejos. Un fallo al resolver un conflicto a mano puede corromper la escena o romper las referencias de los componentes (Missing). Git no entiende los cambios de Unity: Unity modifica datos invisibles de la escena con solo mover la cámara o hacer clic, provocando conflictos accidentales que complican el merge.
 
 **2. ¿Cómo organizarías el trabajo del equipo para reducir estos conflictos?**
-> *(pendiente)*
+> Trabajar con Prefabs: Que cada integrante edite objetos por separado dentro de sus propios Prefabs y no directamente en la escena principal. Dividir en Subescenas: Usar escenas pequeñas e independientes (ej. una para la interfaz, otra para el mapa y otra para la jugabilidad). Comunicación o Bloqueo de archivos: Avisar al equipo antes de tocar la escena compartida o usar herramientas con bloqueo de archivos (Git LFS Locking).
 
 ---
 
