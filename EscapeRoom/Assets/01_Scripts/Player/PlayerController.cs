@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Velocidad del jugador
     public float speed = 5f;
 
     private void Update()
