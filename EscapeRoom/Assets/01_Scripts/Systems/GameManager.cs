@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Initialize();
     }
 
     public void Initialize()
