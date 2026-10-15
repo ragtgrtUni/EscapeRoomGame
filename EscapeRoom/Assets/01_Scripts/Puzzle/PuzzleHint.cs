@@ -1,7 +1,7 @@
 using UnityEngine;
 public class PuzzleHint : MonoBehaviour
 {
-    [SerializeField] private string hint = "El código está escrito en la pared.";
+    [SerializeField] private string hint = "Busca los números en el cuadro.";
 
     public void ShowHint()
     {
