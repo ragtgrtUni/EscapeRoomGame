@@ -11,7 +11,7 @@ public class PuzzleManager : MonoBehaviour
         attempts++;
         Debug.Log("Intento " + attempts + ": " + code);
  
-        bool valid = code == correctCode;
+           bool valid = code.Trim() == correctCode;
  
         if (valid)
         {
