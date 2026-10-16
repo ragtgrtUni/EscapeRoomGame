@@ -311,3 +311,4 @@ Formato de la sección 6 de la guía. El detalle de cada caso, con capturas, est
 
 - El campo Animator de la puerta y el cofre queda vacío a propósito: el código usa `if (animator != null)` y la guía no pide animaciones.
 - Algunos mensajes de commit tienen errores de tipeo (`feet: add player movementt`, `docss`, `x`). No se reescribieron porque ya estaban en GitHub y eso exigía Force Push.
+
