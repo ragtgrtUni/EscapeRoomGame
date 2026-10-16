@@ -167,123 +167,123 @@ main
 ### Caso 09 — Archivo eliminado vs. modificado
 
 **1. ¿Git puede decidir arquitectura?**
-> *(pendiente)*
+> No. Git solo detecta que una rama borró el archivo y la otra lo modificó, pero no sabe si ese archivo todavía es necesario. Eso lo decide el equipo según el diseño: si su responsabilidad se movió a otra clase o si sigue siendo útil.
 
 **2. ¿Qué riesgo hay en conservar un archivo solo para evitar el conflicto?**
-> *(pendiente)*
+> Se deja código muerto u obsoleto, con lógica duplicada que confunde al equipo y puede romper referencias. Además se acumula deuda técnica y se ignora la decisión de diseño de quien lo eliminó.
 
 ---
 
 ### Caso 10 — Dos alumnos crean PuzzleManager.cs
 
 **1. ¿Por qué "el último commit gana" no es una regla válida?**
-> *(pendiente)*
+> Porque solo depende de quién subió primero o después, no de qué versión es mejor. Esa regla sobrescribe el trabajo del otro compañero y se pierde funcionalidad que el juego necesita.
 
 **2. ¿Qué principio de diseño debe guiar la integración?**
-> *(pendiente)*
+> Responsabilidad única y fuente única de verdad: debe existir un solo `PuzzleManager` que combine lo necesario de ambas versiones, evitando duplicar lógica. Antes de integrar, se acuerda con el equipo qué hace cada parte.
 
 ---
 
 ### Caso 11 — Cambios en ProjectSettings
 
 **1. ¿Por qué no se debe aceptar ProjectSettings a ciegas?**
-> *(pendiente)*
+> Porque esos archivos controlan la configuración global del proyecto (input, capas, tags, build, calidad). Un cambio aceptado sin revisar puede romper el juego para todo el equipo, y a veces Unity los modifica solo por abrir el proyecto en otra PC.
 
 **2. ¿Qué configuración consideras especialmente sensible?**
-> *(pendiente)*
+> *Active Input Handling*. Nuestros scripts usan `Input.GetAxis`, así que si alguien lo cambia a solo "Input System Package", el movimiento deja de funcionar. También son sensibles las capas/tags y el Build Settings (escenas incluidas).
 
 ---
 
 ### Caso 12 — Commit incorrecto
 
 **1. ¿Cuándo conviene Amend?**
-> *(pendiente)*
+> Cuando el error está en el último commit y todavía no se ha subido al remoto, por ejemplo para corregir el mensaje o añadir un archivo que se olvidó. Así se evita llenar el historial de commits de corrección.
 
 **2. ¿Por qué reescribir historia compartida puede afectar a otros?**
-> *(pendiente)*
+> Porque Amend cambia el hash del commit. Si otros ya descargaron el original, sus historias divergen del remoto y obligan a forzar el push, lo que puede borrar trabajo ajeno o duplicar commits y causar conflictos.
 
 ---
 
 ### Caso 13 — Archivo que debía estar en .gitignore
 
 **1. ¿Por qué `.gitignore` no borró el historial?**
-> *(pendiente)*
+> Porque `.gitignore` solo afecta a archivos que Git aún no sigue. Lo que ya fue commiteado queda en la historia y sigue rastreado; hay que dejar de seguirlo con `git rm --cached` y hacer un nuevo commit.
 
 **2. ¿Qué diferencia hay entre Working Tree e Index?**
-> *(pendiente)*
+> El Working Tree son los archivos reales en tu carpeta, tal como los editas. El Index (staging area) es la lista de cambios que preparaste con `git add` y que entrarán en el próximo commit.
 
 ---
 
 ### Caso 14 — Feature desactualizada respecto a Dev
 
 **1. ¿Por qué conviene resolver el conflicto en la Feature?**
-> *(pendiente)*
+> Porque así `Dev` se mantiene estable: el conflicto se resuelve y se prueba en la rama propia antes de integrar. Cuando la Feature llega a `Dev`, ya entra limpia y el Pull Request es más fácil de revisar.
 
 **2. ¿Qué diferencia conceptual existe entre merge y rebase?**
-> *(pendiente)*
+> Merge une dos ramas con un commit de fusión y conserva la historia tal como ocurrió. Rebase reaplica tus commits encima del último commit de `Dev`, reescribiéndolos (nuevos hashes) para lograr una historia lineal.
 
 ---
 
 ### Caso 15 — Conflicto en varios archivos
 
 **1. ¿Cómo organizaste la resolución?**
-> *(pendiente)*
+> Primero listé todos los archivos en conflicto y los resolví uno por uno, empezando por los scripts (.cs), luego los prefabs y por último la escena. Coordiné con los dueños de cada cambio para conservar la intención de ambos y guardé cada resolución antes de pasar a la siguiente.
 
 **2. ¿Por qué conviene validar Unity después de resolver todos?**
-> *(pendiente)*
+> Porque los archivos dependen entre sí: un script, un prefab y la escena se referencian. Aunque cada uno parezca bien, solo abrir Unity confirma que compila, que no hay *Missing* y que el juego funciona.
 
 ---
 
 ### Caso 16 — Accept Both rompe el juego
 
 **1. ¿Por qué Accept Both no garantiza corrección?**
-> *(pendiente)*
+> Porque solo junta ambos bloques de texto sin entender el código. Puede dejar variables o métodos duplicados, o dos lógicas que se contradicen (por ejemplo, el movimiento aplicado dos veces), y eso causa errores de compilación o comportamientos raros.
 
 **2. ¿Qué pruebas detectaron el problema?**
-> *(pendiente)*
+> La consola de Unity mostró errores de compilación y, al ejecutar el juego en Play Mode, el comportamiento no era el esperado (por ejemplo, el jugador no se movía bien). Revisar el código resultante línea por línea confirmó la duplicación.
 
 ---
 
 ### Caso 17 — Revert de un cambio compartido
 
 **1. ¿Por qué no borrar el commit original?**
-> *(pendiente)*
+> Porque el commit ya está compartido y otros compañeros lo tienen. Borrarlo reescribe la historia, obliga a un force push y puede dejar los repositorios de todos desincronizados.
 
 **2. ¿Qué ventaja tiene Revert en una historia compartida?**
-> *(pendiente)*
+> Crea un commit nuevo que deshace el cambio sin tocar el pasado. La historia queda intacta y trazable (se ve qué se hizo y por qué se deshizo), es seguro para el equipo y se puede volver a aplicar si hace falta.
 
 ---
 
 ### Caso 18 — Recuperar trabajo aparentemente perdido
 
 **1. ¿Qué registra reflog?**
-> *(pendiente)*
+> Registra localmente todos los movimientos de `HEAD` y de las ramas (commits, checkouts, resets, merges), incluyendo commits que ya no son alcanzables desde ninguna rama.
 
 **2. ¿Por qué guardar el hash fue importante?**
-> *(pendiente)*
+> Porque con el hash se puede recuperar el commit exacto (`git branch recuperada <hash>` o `git reset`) sin buscarlo entre muchas entradas del reflog, que además expiran con el tiempo.
 
 ---
 
 ### Caso 19 — Cherry-pick de una corrección
 
 **1. ¿Por qué no hacer merge?**
-> *(pendiente)*
+> Porque un merge traería todos los commits de la otra rama, incluyendo funciones incompletas o no deseadas. Solo se necesitaba la corrección puntual.
 
 **2. ¿Qué diferencia hay entre cherry-pick y merge?**
-> *(pendiente)*
+> Cherry-pick copia un commit específico a la rama actual (con un hash nuevo). Merge integra la historia completa de una rama dentro de otra.
 
 ---
 
 ### Caso 20 — Pull Request y entrega final
 
 **1. ¿Qué ventaja tiene revisar antes de integrar?**
-> *(pendiente)*
+> Permite detectar errores, conflictos y malas prácticas antes de que lleguen a la rama compartida. Además, el equipo conoce los cambios y se mejora la calidad del código.
 
 **2. ¿Qué diferencia hay entre Dev y main?**
-> *(pendiente)*
+> `Dev` es la rama de integración donde se juntan y prueban las Features. `main` guarda solo versiones estables y validadas, listas para entregar.
 
 **3. ¿Qué problema evita el Pull Request?**
-> *(pendiente)*
+> Evita que cambios sin revisar o con errores entren directamente a una rama principal, y que se sobrescriba el trabajo de otros. Deja una revisión formal antes de fusionar.
 
 **4. ¿Qué evidencia demuestra mejor que el trabajo fue colaborativo?**
-> *(pendiente)*
+> El historial de commits con distintos autores, las ramas Feature de cada integrante, y los Pull Requests con revisiones y comentarios. Todo junto muestra quién aportó qué y cómo se integró.
