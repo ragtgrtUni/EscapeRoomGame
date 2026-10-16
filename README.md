@@ -37,37 +37,46 @@ main
 | Versión de Unity | 6000.5.5f1 |
 | Active Input Handling | Both (los scripts usan `Input.GetAxis`) |
 | Carpeta del proyecto Unity | `EscapeRoom/` |
+| Escena principal | `Assets/00_Scenes/MainScene.unity` |
+| Versión entregada | `main` (`5df30aa`) · etiqueta `v1.0` |
+
+### Cómo abrir el proyecto
+
+1. Clonar el repositorio y abrir la carpeta `EscapeRoom/` desde Unity Hub con Unity 6000.5.5f1.
+2. Abrir `Assets/00_Scenes/MainScene.unity` y darle Play.
+3. Controles: **WASD** para moverse y **E** para interactuar. Hay que tomar la llave y luego ir a la puerta.
 
 ---
 
 ## 📓 Bitácora
 
-<!-- ZONA 1: TABLA RESUMEN. Cambia ⬜ por ✅ cuando termines cada caso. -->
+Formato de la sección 6 de la guía. El detalle de cada caso, con capturas, está en el PDF de evidencias.
 
-| Caso | Tema | Responsable de evidencia | Estado |
-|:----:|------|--------------------------|:------:|
-| 01 | Crear el repositorio y primer commit | E — Alan | ✅ |
-| 02 | Crear Dev y ramas Feature | D — Cristhian | ✅ |
-| 03 | Commit en la rama equivocada | E — Alan | ✅ |
-| 04 | Cambios locales y Stash | C — Mariana | ✅ |
-| 05 | Push rechazado porque Dev avanzó | A — Aaron | ✅ |
-| 06 | Conflicto en PlayerController.cs | E — Alan | ⬜ |
-| 07 | Conflicto en Player.prefab | B — Grover | ⬜ |
-| 08 | Conflicto en MainScene.unity | D — Cristhian | ⬜ |
-| 09 | Archivo eliminado vs. modificado | B — Grover | ⬜ |
-| 10 | Dos alumnos crean PuzzleManager.cs | C — Mariana | ⬜ |
-| 11 | Cambios en ProjectSettings | D — Cristhian | ⬜ |
-| 12 | Commit incorrecto | A — Aaron | ⬜ |
-| 13 | Archivo que debía estar en .gitignore | B — Grover | ⬜ |
-| 14 | Feature desactualizada respecto a Dev | C — Mariana | ⬜ |
-| 15 | Conflicto en varios archivos | D — Cristhian | ⬜ |
-| 16 | Accept Both rompe el juego | D — Cristhian | ⬜ |
-| 17 | Revert de un cambio compartido | C — Mariana | ⬜ |
-| 18 | Recuperar trabajo aparentemente perdido | E — Alan | ⬜ |
-| 19 | Cherry-pick de una corrección | A — Aaron | ⬜ |
-| 20 | Pull Request y entrega final | C — Mariana | ⬜ |
+| Caso | Problema | ¿Provocado? | ¿Resuelto? | Evidencia | Responsables |
+|:----:|----------|:-----------:|:----------:|-----------|--------------|
+| 01 | Más de 10 000 cambios sin `.gitignore`; carpetas vacías no se subían | Sí | Sí | `55a9f81`, `f594348` | Aaron |
+| 02 | Crear Dev y Features; `Feature_UI` nació de main | Sí | Sí | `c506846` | Cristhian |
+| 03 | Commit en la rama equivocada (Dev) | Sí | Sí | `8927097`, `7b5e24c` | Aaron |
+| 04 | Checkout bloqueado por cambios locales | Sí | Sí, con Stash | `13bdea9` | Grover |
+| 05 | Push rechazado; conflicto en README | Sí | Sí | `f002d29` | Alan, Cristhian |
+| 06 | Conflicto en `Update()` de PlayerController | Sí | Sí | `464dccf` | Mariana, Grover, Cristhian |
+| 07 | Cambios simultáneos en `Player.prefab` | Sí | Sí | `40f8e5b` | Mariana, Cristhian, Alan, Grover |
+| 08 | Conflicto en la escena (Chest y Door) | Sí | Sí | `40a5755` | Grover, Alan, Mariana |
+| 09 | Delete/modify de `OldDoorController` | Sí | Sí, se elimina | `770fb35` | Mariana, Cristhian, Alan |
+| 10 | Add/add de `PuzzleManager.cs` | Sí | Sí | `927cb81` | Cristhian, Mariana |
+| 11 | Conflicto en ProjectSettings | Sí | Sí | `df7534e` | Alan, Mariana, Grover |
+| 12 | Commit con un archivo de prueba | Sí | Sí, con Amend | `c31f007` | Aaron |
+| 13 | `TempLaboratorio/` seguido por Git | Sí | Sí | `610211e` | Aaron |
+| 14 | `Feature_Puzzle` desactualizada | Sí | Sí | `c56a518` | Cristhian |
+| 15 | Tres archivos en conflicto | Sí | Sí | `a32ab4f` | Grover, Mariana, Alan |
+| 16 | Accept Both duplica `Initialize()` | Sí | Sí | `385af7b` | Alan, Grover, Mariana |
+| 17 | La puerta no abre con la llave | Sí | Sí, con Revert | `c2a67ac` | Alan, Grover |
+| 18 | Commit perdido con `reset --hard` | Sí | Sí, con reflog | `dc30ddb` | Aaron |
+| 19 | Dev necesita solo una corrección | Sí | Sí, con Cherry Pick | `f961181` | Aaron |
+| 20 | La revisión del PR pidió cambios | Sí | Sí | `85eac46`, `5df30aa` | Cristhian, Grover, Alan |
+| R | La escena de Dev no tenía Player | No | Sí | `8351df9` | Alan |
 
-<!-- ZONA 2: DETALLE POR CASO. Para responder un caso, reemplaza *(pendiente)* por tu respuesta. -->
+### Preguntas de reflexión
 
 ### Caso 01 — Crear el repositorio y primer commit
 
@@ -167,123 +176,138 @@ main
 ### Caso 09 — Archivo eliminado vs. modificado
 
 **1. ¿Git puede decidir arquitectura?**
-> No. Git solo detecta que una rama borró el archivo y la otra lo modificó, pero no sabe si ese archivo todavía es necesario. Eso lo decide el equipo según el diseño: si su responsabilidad se movió a otra clase o si sigue siendo útil.
+> No. Git solo ve que un lado borró y otro modificó. Decidir si el archivo sigue siendo necesario lo hace el equipo.
 
 **2. ¿Qué riesgo hay en conservar un archivo solo para evitar el conflicto?**
-> Se deja código muerto u obsoleto, con lógica duplicada que confunde al equipo y puede romper referencias. Además se acumula deuda técnica y se ignora la decisión de diseño de quien lo eliminó.
+> Queda código muerto o duplicado. En nuestro caso, `OldDoorController` incluso rompía la compilación por definir otra clase `DoorController`.
 
 ---
 
 ### Caso 10 — Dos alumnos crean PuzzleManager.cs
 
 **1. ¿Por qué "el último commit gana" no es una regla válida?**
-> Porque solo depende de quién subió primero o después, no de qué versión es mejor. Esa regla sobrescribe el trabajo del otro compañero y se pierde funcionalidad que el juego necesita.
+> Porque el orden de llegada no dice cuál código es mejor. Se perdería trabajo útil del otro integrante.
 
 **2. ¿Qué principio de diseño debe guiar la integración?**
-> Responsabilidad única y fuente única de verdad: debe existir un solo `PuzzleManager` que combine lo necesario de ambas versiones, evitando duplicar lógica. Antes de integrar, se acuerda con el equipo qué hace cada parte.
+> Que quede una sola clase con una responsabilidad clara, que cubra lo que necesitaban los dos y que el resto del juego la pueda usar.
 
 ---
 
 ### Caso 11 — Cambios en ProjectSettings
 
 **1. ¿Por qué no se debe aceptar ProjectSettings a ciegas?**
-> Porque esos archivos controlan la configuración global del proyecto (input, capas, tags, build, calidad). Un cambio aceptado sin revisar puede romper el juego para todo el equipo, y a veces Unity los modifica solo por abrir el proyecto en otra PC.
+> Porque un solo archivo guarda decenas de configuraciones. Aceptar un lado entero puede revertir sin querer otra configuración del proyecto.
 
 **2. ¿Qué configuración consideras especialmente sensible?**
-> *Active Input Handling*. Nuestros scripts usan `Input.GetAxis`, así que si alguien lo cambia a solo "Input System Package", el movimiento deja de funcionar. También son sensibles las capas/tags y el Build Settings (escenas incluidas).
+> La versión del editor, el pipeline de render, la plataforma de destino y las escenas del Build Settings.
 
 ---
 
 ### Caso 12 — Commit incorrecto
 
 **1. ¿Cuándo conviene Amend?**
-> Cuando el error está en el último commit y todavía no se ha subido al remoto, por ejemplo para corregir el mensaje o añadir un archivo que se olvidó. Así se evita llenar el historial de commits de corrección.
+> Solo cuando el commit todavía no se subió. Sirve para corregir el último commit sin dejar uno extra en la historia.
 
 **2. ¿Por qué reescribir historia compartida puede afectar a otros?**
-> Porque Amend cambia el hash del commit. Si otros ya descargaron el original, sus historias divergen del remoto y obligan a forzar el push, lo que puede borrar trabajo ajeno o duplicar commits y causar conflictos.
+> El Amend cambia el hash. Si otro ya tenía el commit viejo, su historia y la del remoto ya no coinciden y obligan a un Force Push.
 
 ---
 
 ### Caso 13 — Archivo que debía estar en .gitignore
 
 **1. ¿Por qué `.gitignore` no borró el historial?**
-> Porque `.gitignore` solo afecta a archivos que Git aún no sigue. Lo que ya fue commiteado queda en la historia y sigue rastreado; hay que dejar de seguirlo con `git rm --cached` y hacer un nuevo commit.
+> El `.gitignore` solo afecta a archivos que todavía no se siguen. Lo que ya está en commits anteriores se queda en la historia.
 
 **2. ¿Qué diferencia hay entre Working Tree e Index?**
-> El Working Tree son los archivos reales en tu carpeta, tal como los editas. El Index (staging area) es la lista de cambios que preparaste con `git add` y que entrarán en el próximo commit.
+> El Working Tree son los archivos en disco. El Index (stage) es lo que va a entrar en el próximo commit. `git rm --cached` lo saca del Index sin borrarlo del disco.
 
 ---
 
 ### Caso 14 — Feature desactualizada respecto a Dev
 
 **1. ¿Por qué conviene resolver el conflicto en la Feature?**
-> Porque así `Dev` se mantiene estable: el conflicto se resuelve y se prueba en la rama propia antes de integrar. Cuando la Feature llega a `Dev`, ya entra limpia y el Pull Request es más fácil de revisar.
+> Así Dev nunca queda roto. Cuando la Feature vuelve a Dev ya está al día y el merge es limpio.
 
 **2. ¿Qué diferencia conceptual existe entre merge y rebase?**
-> Merge une dos ramas con un commit de fusión y conserva la historia tal como ocurrió. Rebase reaplica tus commits encima del último commit de `Dev`, reescribiéndolos (nuevos hashes) para lograr una historia lineal.
+> Merge une dos historias y deja un commit de merge que lo registra. Rebase reescribe los commits de la Feature como si hubieran nacido del Dev actual; por eso no se usa en ramas compartidas.
 
 ---
 
 ### Caso 15 — Conflicto en varios archivos
 
 **1. ¿Cómo organizaste la resolución?**
-> Primero listé todos los archivos en conflicto y los resolví uno por uno, empezando por los scripts (.cs), luego los prefabs y por último la escena. Coordiné con los dueños de cada cambio para conservar la intención de ambos y guardé cada resolución antes de pasar a la siguiente.
+> Primero el script, porque es texto legible; después el Prefab y al final la escena. Cada uno se guardó y se puso en stage antes de pasar al siguiente.
 
 **2. ¿Por qué conviene validar Unity después de resolver todos?**
-> Porque los archivos dependen entre sí: un script, un prefab y la escena se referencian. Aunque cada uno parezca bien, solo abrir Unity confirma que compila, que no hay *Missing* y que el juego funciona.
+> Porque los tres archivos dependen entre sí. Probar con uno solo resuelto da un resultado que no es el final.
 
 ---
 
 ### Caso 16 — Accept Both rompe el juego
 
 **1. ¿Por qué Accept Both no garantiza corrección?**
-> Porque solo junta ambos bloques de texto sin entender el código. Puede dejar variables o métodos duplicados, o dos lógicas que se contradicen (por ejemplo, el movimiento aplicado dos veces), y eso causa errores de compilación o comportamientos raros.
+> Solo pega los dos bloques uno debajo del otro. Si los dos hacían lo mismo, el resultado lo hace dos veces.
 
 **2. ¿Qué pruebas detectaron el problema?**
-> La consola de Unity mostró errores de compilación y, al ejecutar el juego en Play Mode, el comportamiento no era el esperado (por ejemplo, el jugador no se movía bien). Revisar el código resultante línea por línea confirmó la duplicación.
+> Darle Play en Unity y leer la Console: el contador de `Initialize()` mostró "Veces: 1" y "Veces: 2".
 
 ---
 
 ### Caso 17 — Revert de un cambio compartido
 
 **1. ¿Por qué no borrar el commit original?**
-> Porque el commit ya está compartido y otros compañeros lo tienen. Borrarlo reescribe la historia, obliga a un force push y puede dejar los repositorios de todos desincronizados.
+> Ya estaba en GitHub y otros lo tenían. Borrarlo obliga a reescribir historia compartida y a usar Force Push.
 
 **2. ¿Qué ventaja tiene Revert en una historia compartida?**
-> Crea un commit nuevo que deshace el cambio sin tocar el pasado. La historia queda intacta y trazable (se ve qué se hizo y por qué se deshizo), es seguro para el equipo y se puede volver a aplicar si hace falta.
+> Deshace el efecto con un commit nuevo. Nadie pierde nada, todos hacen Pull normal y queda registrado qué se deshizo.
 
 ---
 
 ### Caso 18 — Recuperar trabajo aparentemente perdido
 
 **1. ¿Qué registra reflog?**
-> Registra localmente todos los movimientos de `HEAD` y de las ramas (commits, checkouts, resets, merges), incluyendo commits que ya no son alcanzables desde ninguna rama.
+> Cada movimiento de HEAD en el repositorio local: commits, checkouts, resets y merges. Por eso muestra commits que ninguna rama apunta ya.
 
 **2. ¿Por qué guardar el hash fue importante?**
-> Porque con el hash se puede recuperar el commit exacto (`git branch recuperada <hash>` o `git reset`) sin buscarlo entre muchas entradas del reflog, que además expiran con el tiempo.
+> Porque permitió identificar sin dudas el commit correcto (`dc30ddb`) entre todas las entradas del reflog.
 
 ---
 
 ### Caso 19 — Cherry-pick de una corrección
 
 **1. ¿Por qué no hacer merge?**
-> Porque un merge traería todos los commits de la otra rama, incluyendo funciones incompletas o no deseadas. Solo se necesitaba la corrección puntual.
+> Un merge habría llevado a Dev los tres commits de la Feature, incluido el temporizador, que todavía no estaba listo.
 
 **2. ¿Qué diferencia hay entre cherry-pick y merge?**
-> Cherry-pick copia un commit específico a la rama actual (con un hash nuevo). Merge integra la historia completa de una rama dentro de otra.
+> Merge trae toda la historia de una rama. Cherry-pick copia un solo commit como uno nuevo, con distinto hash.
 
 ---
 
 ### Caso 20 — Pull Request y entrega final
 
 **1. ¿Qué ventaja tiene revisar antes de integrar?**
-> Permite detectar errores, conflictos y malas prácticas antes de que lleguen a la rama compartida. Además, el equipo conoce los cambios y se mejora la calidad del código.
+> Otra persona ve el cambio antes de que llegue a Dev. En el PR #2 la revisión pidió cambios y se corrigieron en la misma rama, sin romper Dev.
 
 **2. ¿Qué diferencia hay entre Dev y main?**
-> `Dev` es la rama de integración donde se juntan y prueban las Features. `main` guarda solo versiones estables y validadas, listas para entregar.
+> Dev es donde se integra y se prueba. `main` solo recibe versiones revisadas y estables, como la `v1.0`.
 
 **3. ¿Qué problema evita el Pull Request?**
-> Evita que cambios sin revisar o con errores entren directamente a una rama principal, y que se sobrescriba el trabajo de otros. Deja una revisión formal antes de fusionar.
+> Evita que se integre código sin revisión o sin probar, y deja registro de quién aprobó y qué se discutió.
 
 **4. ¿Qué evidencia demuestra mejor que el trabajo fue colaborativo?**
-> El historial de commits con distintos autores, las ramas Feature de cada integrante, y los Pull Requests con revisiones y comentarios. Todo junto muestra quién aportó qué y cómo se integró.
+> El historial: commits de los cinco integrantes, merges hechos por distintas personas y el PR revisado por otro integrante.
+
+---
+
+## 🧩 Conflictos más difíciles
+
+**Caso 16 · Accept Both.** El archivo quedó sin marcadores y compiló, así que parecía resuelto. El error solo apareció al darle Play: `Initialize()` se ejecutaba dos veces. Se dejó una sola llamada en `Start()`. Resolver el texto no es lo mismo que tener el juego funcionando.
+
+**Casos 08 y 15 · Escena y varios archivos.** La escena y el Prefab son YAML generado por Unity, difíciles de leer en el Merge Editor. En el 15 había tres archivos dependientes entre sí y hubo que resolverlos todos antes de probar. En esta etapa se descubrió que la escena de Dev no tenía al Player, lo que llevó a la Reparación (`8351df9`).
+
+**Caso 09 · Delete/modify.** Git no podía decidir si `OldDoorController` debía existir. La decisión salió de abrir Unity, ver el error por la clase duplicada y confirmar que nadie usaba el archivo.
+
+## 📝 Decisiones del equipo
+
+- El campo Animator de la puerta y el cofre queda vacío a propósito: el código usa `if (animator != null)` y la guía no pide animaciones.
+- Algunos mensajes de commit tienen errores de tipeo (`feet: add player movementt`, `docss`, `x`). No se reescribieron porque ya estaban en GitHub y eso exigía Force Push.
