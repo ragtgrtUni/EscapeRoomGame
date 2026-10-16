@@ -2,6 +2,7 @@
 
    public class PuzzleTimer : MonoBehaviour
    {
+        // Tiempo límite en segundos
        [SerializeField] private float timeLimit = 120f;
        private float elapsed;
 
